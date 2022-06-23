@@ -1,0 +1,157 @@
+<div class="my-account-redirect text-end">
+  <a href="../profile/index.html" class="account-btn btn btn-primary">
+    My Account
+  </a>
+</div>
+<div class="logo"></div>
+
+<div class ="unread-books books-block" >
+  <div class="book-label text-center">
+    <div>
+      <h4>Books To Read</h4>
+    </div>
+    <button (click)="openModal(modal)" type="button" id="add_unread_book_btn" class="books-to-read-btn btn btn-primary" data-bs-toggle="modal" data-bs-target="#myBookModal">
+      +
+    </button>
+  </div>
+  <div class="card bg-dark text-white">
+    <div class="row text-center border-bottom">
+      <div class="col"><h4>Author</h4></div>
+      <div class="col"><h4>Name</h4></div>
+    </div>
+    <div id="unread_books_container">
+      <ng-container *ngFor="let book of books">
+        <div class="row book text-center">
+          <div class="col book-author border-end">
+            {{book?.author}}
+          </div>
+          <div class="col book-name border-end">
+            {{book?.name}}
+          </div>
+          <div class="col book-review border-end ${!isRead ? 'hidden' : ''}">
+            {{book?.review}}
+          </div>
+          <div class="col book-rate border-end ${!isRead ? 'hidden' : ''}">
+            {{book?.rating}}
+          </div>
+          <button (click)="onRemoveBook(book.id)" class="col remove-book-btn" data-book-id="${id}" style="padding: 0 !important;">x</button>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>
+
+<div class="read-books books-block">
+  <div class="book-label text-center">
+    <div>
+      <h4>My Books</h4>
+    </div>
+    <button type="button" id="add_my_book_btn" class="my-books-btn btn btn-primary" data-bs-toggle="modal" data-bs-target="#myBookModal">
+      +
+    </button>
+  </div>
+
+  <div class="card bg-dark text-white">
+    <div class="row text-center border-bottom">
+      <div class="col"><h4>Author</h4></div>
+      <div class="col"><h4>Name</h4></div>
+      <div class="col"><h4>Review</h4></div>
+      <div class="col"><h4>Rate</h4></div>
+    </div>
+    <div id="my_books_container">
+      <ng-container *ngFor="let book of books">
+        <div class="row book text-center">
+          <div class="col book-author border-end">
+            {{book?.author}}
+          </div>
+          <div class="col book-name border-end">
+            {{book?.name}}
+          </div>
+          <div class="col book-review border-end ${!isRead ? 'hidden' : ''}">
+            {{book?.review}}
+          </div>
+          <div class="col book-rate border-end ${!isRead ? 'hidden' : ''}">
+            {{book?.rating}}
+          </div>
+          <button (click)="onRemoveBook(book.id)" class="col remove-book-btn" data-book-id="${id}" style="padding: 0 !important;">x</button>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>
+
+
+<div class="top-rate-books">
+  <div class="book-label text-center">
+    <div>
+      <h4>My Top</h4>
+    </div>
+  </div>
+
+  <div class="card bg-dark text-white">
+    <div class="row text-center border-bottom">
+      <div class="col"><h4>Rate</h4></div>
+      <div class="col"><h4>Author</h4></div>
+      <div class="col"><h4>Name</h4></div>
+    </div>
+    <div id="my_top_container">
+      <ng-container *ngFor="let book of books">
+        <div class="row book text-center">
+          <div class="col book-author border-end">
+            {{book?.author}}
+          </div>
+          <div class="col book-name border-end">
+            {{book?.name}}
+          </div>
+          <div class="col book-review border-end ${!isRead ? 'hidden' : ''}">
+            {{book?.review}}
+          </div>
+          <div class="col book-rate border-end ${!isRead ? 'hidden' : ''}">
+            {{book?.rating}}
+          </div>
+          <button (click)="onRemoveBook(book.id)" class="col remove-book-btn" data-book-id="${id}" style="padding: 0 !important;">x</button>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>
+
+<ng-template #modal class="modal fade" id="myBookModal" tabindex="-1" aria-labelledby="myBookModal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="myBookModalLabel">Add Book</h5>
+        <button (click)="closeModal()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="/" [formGroup]="form">
+          <div class="row mb-3">
+            <div class="col-6">
+              <input formControlName="author" type="text" id="author" class="form-control" placeholder="Author">
+            </div>
+
+            <div class="col-6">
+              <input formControlName="name" type="text" id="name" class="form-control" placeholder="Name">
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <div class="col">
+              <textarea formControlName="review" class="form-control" id="review" placeholder="Review" rows="3"></textarea>
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <div class="col">
+              <input formControlName="rating" type="number" id="rate" class="form-control" placeholder="Rating" max="10" min="0">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button (click)="closeModal()" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button (click)="onAddBook()" type="submit" id="add_book" class="btn btn-primary" data-bs-dismiss="modal">Save changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</ng-template>

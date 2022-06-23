@@ -1,0 +1,7 @@
+body{
+  background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(88,110,136,1) 100%);
+  padding: 0 30px 30px;
+}
+button, a {
+  cursor: pointer !important;
+}
